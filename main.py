@@ -120,7 +120,7 @@ class youtube(QMainWindow):
 
             else:
 
-                regra = 1  # Atribuição de valor para inicia o timer tempo de download
+                regra = 1  # Atribuição de valor para iniciar o timer - tempo de download
                 print(regra)
 
                 if self.ui.rb_mp4.isChecked() == True:
