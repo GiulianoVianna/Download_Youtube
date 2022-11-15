@@ -137,7 +137,8 @@ class youtube(QMainWindow):
                 self.ui.lb_download.setStyleSheet("color: rgb(0, 85, 0);")
 
         except:
-            self.mensagem_link_error()  
+            self.mensagem_link_error()
+            regra = 0 
 
 ###########################################################################
 
