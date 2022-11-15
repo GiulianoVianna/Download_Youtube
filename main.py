@@ -27,7 +27,7 @@ class youtube(QMainWindow):
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.lcd_time)        
         self.timer.start(1000)
-        self.ui.bt_download.clicked.connect(self.download and self.thread)
+        self.ui.bt_download.clicked.connect(self.thread)
 
 ###########################################################################
 
@@ -84,15 +84,29 @@ class youtube(QMainWindow):
 
     # Função para o processo não travar - Thread
     def thread(self):
-        t1=Thread(target=self.download)
-        t1.start()
+
+        if self.ui.txt_link.text() == "":               
+
+            self.mensagem_link()
+            self.ui.txt_link.setFocus()
+
+        elif self.ui.txt_nome.text() == "":
+
+            self.mensagem_nome_arquivo()
+            self.ui.txt_nome.setFocus()
+        
+        else:
+
+            t1=Thread(target=self.download)
+            t1.start()
+
 
 ###########################################################################
             
     # Função - Download do youtube
 
     def download(self):
-
+        
         global regra, count, minutos, segundos, tempo
 
         self.ui.lb_download.setText("Tempo: 00:00")
@@ -104,41 +118,29 @@ class youtube(QMainWindow):
 
         try:                 
 
-            if self.ui.txt_link.text() == "":               
+            regra = 1  # Atribuição de valor para iniciar o timer - tempo de download
+            print(regra)
 
-                self.mensagem_link()
-                self.ui.txt_link.setFocus()
+            if self.ui.rb_mp4.isChecked() == True:
+                url = self.ui.txt_link.text()
+                self.titulo = self.ui.txt_nome.text()
+                self.titulo_mp4 = self.titulo + '.mp4'
+                yt_download(url, self.titulo_mp4)  # Converte arquivo em .mp4
 
-            elif self.ui.txt_nome.text() == "":
+            elif self.ui.rb_mp3.isChecked() == True:
+                url = self.ui.txt_link.text()
+                self.titulo = self.ui.txt_nome.text()
+                self.titulo_mp3 = self.titulo + '.mp3' 
+                yt_download(url, self.titulo_mp3, ismusic=True, codec='mp3')  # Converte arquivo em .mp3
 
-                self.mensagem_nome_arquivo()
-                self.ui.txt_nome.setFocus()
-
-            else:
-
-                regra = 1  # Atribuição de valor para iniciar o timer - tempo de download
-                print(regra)
-
-                if self.ui.rb_mp4.isChecked() == True:
-                    url = self.ui.txt_link.text()
-                    self.titulo = self.ui.txt_nome.text()
-                    self.titulo_mp4 = self.titulo + '.mp4'
-                    yt_download(url, self.titulo_mp4)  # Converte arquivo em .mp4
-
-                elif self.ui.rb_mp3.isChecked() == True:
-                    url = self.ui.txt_link.text()
-                    self.titulo = self.ui.txt_nome.text()
-                    self.titulo_mp3 = self.titulo + '.mp3' 
-                    yt_download(url, self.titulo_mp3, ismusic=True, codec='mp3')  # Converte arquivo em .mp3
-
-                regra = 0  # Atribuição de valor pausa o timer do tempo de download
-                print(regra)
-                self.ui.lb_download.setText(f'Finalizado - {tempo}')
-                self.ui.lb_download.setStyleSheet("color: rgb(0, 85, 0);")
+            regra = 0  # Atribuição de valor pausa o timer do tempo de download
+            print(regra)
+            self.ui.lb_download.setText(f'Finalizado - {tempo}')
+            self.ui.lb_download.setStyleSheet("color: rgb(0, 85, 0);")
 
         except:
             self.mensagem_link_error()
-            regra = 0 
+            regra = 0  
 
 ###########################################################################
 
