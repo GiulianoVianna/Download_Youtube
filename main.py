@@ -47,20 +47,6 @@ class youtube(QMainWindow):
         msg1.setText('Favor informar um nome para a música!')
         x = msg1.exec()
 
-    def mensagem_formato_audio(self):
-        msg1 = QMessageBox()
-        msg1.setIcon(QMessageBox.Information)
-        msg1.setWindowTitle('Atenção!')
-        msg1.setText('Favor informar um formato de audio!')
-        x = msg1.exec()
-
-    def mensagem_down_finalizado(self):
-        msg1 = QMessageBox()
-        msg1.setIcon(QMessageBox.Information)
-        msg1.setWindowTitle('Atenção!')
-        msg1.setText('Download Finalizado!')
-        x = msg1.exec()
-
     def mensagem_link_error(self):
         msg1 = QMessageBox()
         msg1.setIcon(QMessageBox.Information)
