@@ -14,7 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(497, 122)
+        Form.resize(497, 130)
+        Form.setFixedSize(497, 130)
         Form.setStyleSheet("background-color: rgb(176, 176, 176);")
         self.bt_download = QtWidgets.QPushButton(Form)
         self.bt_download.setGeometry(QtCore.QRect(400, 40, 83, 25))
@@ -52,9 +53,9 @@ class Ui_Form(object):
         self.groupBox.setGeometry(QtCore.QRect(270, 68, 211, 51))
         self.groupBox.setObjectName("groupBox")
         self.lb_download = QtWidgets.QLabel(self.groupBox)
-        self.lb_download.setGeometry(QtCore.QRect(10, 25, 121, 21))
+        self.lb_download.setGeometry(QtCore.QRect(10, 25, 191, 21))
         font = QtGui.QFont()
-        font.setPointSize(11)
+        font.setPointSize(9)
         self.lb_download.setFont(font)
         self.lb_download.setStyleSheet("color: rgb(0, 85, 255);")
         self.lb_download.setObjectName("lb_download")

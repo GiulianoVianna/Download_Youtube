@@ -136,13 +136,13 @@ color: rgb(255, 255, 255);</string>
      <rect>
       <x>10</x>
       <y>25</y>
-      <width>121</width>
+      <width>191</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>11</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="styleSheet">

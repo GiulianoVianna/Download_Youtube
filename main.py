@@ -14,6 +14,7 @@ count = 0
 minutos = 0
 segundos = 0
 regra = 0
+tempo = 0
 
 ### Classe Tela Principal ###
 
@@ -53,6 +54,13 @@ class youtube(QMainWindow):
         msg1.setText('Favor informar um formato de audio!')
         x = msg1.exec()
 
+    def mensagem_down_finalizado(self):
+        msg1 = QMessageBox()
+        msg1.setIcon(QMessageBox.Information)
+        msg1.setWindowTitle('Atenção!')
+        msg1.setText('Download Finalizado!')
+        x = msg1.exec()
+
     def mensagem_link_error(self):
         msg1 = QMessageBox()
         msg1.setIcon(QMessageBox.Information)
@@ -66,7 +74,7 @@ class youtube(QMainWindow):
    ### Função lcd_time - Atualiza display e o tempo de download
     def lcd_time(self):
 
-        global count, minutos, segundos, regra
+        global count, minutos, segundos, regra, tempo
         
         tempo_corrente = QTime.currentTime()
         display = tempo_corrente.toString('hh:mm:ss')
@@ -99,9 +107,11 @@ class youtube(QMainWindow):
 
     def download(self):
 
+        global regra, count, minutos, segundos, tempo
+
         self.ui.lb_download.setText("Tempo: 00:00")
-        global regra, count, minutos, segundos
-        
+        self.ui.lb_download.setStyleSheet("color: rgb(0, 85, 255);")        
+
         count = 0
         minutos = 0
         segundos = 0
@@ -127,16 +137,18 @@ class youtube(QMainWindow):
                     url = self.ui.txt_link.text()
                     self.titulo = self.ui.txt_nome.text()
                     self.titulo_mp4 = self.titulo + '.mp4'
-                    yt_download(url, self.titulo_mp4)
+                    yt_download(url, self.titulo_mp4)  # Converte arquivo em .mp4
 
                 elif self.ui.rb_mp3.isChecked() == True:
                     url = self.ui.txt_link.text()
                     self.titulo = self.ui.txt_nome.text()
                     self.titulo_mp3 = self.titulo + '.mp3' 
-                    yt_download(url, self.titulo_mp3, ismusic=True, codec='mp3')
+                    yt_download(url, self.titulo_mp3, ismusic=True, codec='mp3')  # Converte arquivo em .mp3
 
                 regra = 0  # Atribuição de valor pausa o timer do tempo de download
-                print(regra) 
+                print(regra)
+                self.ui.lb_download.setText(f'Finalizado - {tempo}')
+                self.ui.lb_download.setStyleSheet("color: rgb(0, 85, 0);")
 
         except:
             self.mensagem_link_error()  
